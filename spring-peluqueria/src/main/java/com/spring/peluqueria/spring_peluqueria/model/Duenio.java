@@ -1,9 +1,14 @@
 package com.spring.peluqueria.spring_peluqueria.model;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Duenio {
@@ -14,6 +19,11 @@ public class Duenio {
     private String nombre;
     private String apellido;
     private String direccion;
+
+    @OneToMany(mappedBy = "unDuenio")
+    @JsonManagedReference
+    private List<Mascota> mascotas;
+
 
     public Duenio(){}
 
@@ -54,6 +64,14 @@ public class Duenio {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public List<Mascota> getMascotas() {
+        return mascotas;
+    }
+
+    public void setMascotas(List<Mascota> mascotas) {
+        this.mascotas = mascotas;
     }
     
     

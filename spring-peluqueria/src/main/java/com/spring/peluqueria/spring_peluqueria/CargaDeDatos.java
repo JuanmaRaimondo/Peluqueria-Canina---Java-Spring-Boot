@@ -38,18 +38,22 @@ public class CargaDeDatos implements CommandLineRunner {
         // --- 2. CREAMOS 5 MASCOTAS (Cada una con su dueño) ---
         // Fíjate que le paso el OBJETO dueño entero (d1, d2...), no el ID.
         
-        Mascota m1 = new Mascota(null, "Firulais", "Caniche", "Blanco");
-        Mascota m2 = new Mascota(null, "Rex", "Ovejero", "Marron");
-        Mascota m3 = new Mascota(null, "Lola", "Beagle", "Tricolor");
-        Mascota m4 = new Mascota(null, "Luna", "Gato", "Negro");
-        Mascota m5 = new Mascota(null, "Rocky", "Bulldog", "Gris");
+        Mascota m1 = new Mascota(null, "Firulais", "Caniche", "Blanco", d1);
+        Mascota m2 = new Mascota(null, "Rex", "Ovejero", "Marron", d2);
+        Mascota m3 = new Mascota(null, "Lola", "Beagle", "Tricolor", d3);
+        Mascota m4 = new Mascota(null, "Luna", "Gato", "Negro", d4);
+        Mascota m5 = new Mascota(null, "Rocky", "Bulldog", "Gris", d5);
+        Mascota mExtra = new Mascota(null, "Hércules", "Doberman", "Negro", d1);
+
+
+System.out.println("✅ Ahora Juan tiene 2 perros");
 
         mascotaRepo.save(m1);
         mascotaRepo.save(m2);
         mascotaRepo.save(m3);
         mascotaRepo.save(m4);
         mascotaRepo.save(m5);
-
+        mascotaRepo.save(mExtra);
         System.out.println("--------------------------------------------");
         System.out.println("✅ DATOS DE PRUEBA CARGADOS EXITOSAMENTE");
         System.out.println("--------------------------------------------");

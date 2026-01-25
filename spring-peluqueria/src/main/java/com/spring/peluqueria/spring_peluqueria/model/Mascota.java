@@ -1,10 +1,14 @@
 package com.spring.peluqueria.spring_peluqueria.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+
 
 @Entity
 public class Mascota {
@@ -16,17 +20,20 @@ public class Mascota {
     private String raza;
     private String observaciones;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "un_duenio_id")
+    @JsonBackReference
     private Duenio unDuenio;
 
     public Mascota() {
     }
 
-    public Mascota(Long id, String nombre, String raza, String observaciones) {
+    public Mascota(Long id, String nombre, String raza, String observaciones, Duenio unDuenio) {
         this.id = id;
         this.nombre = nombre;
         this.raza = raza;
         this.observaciones = observaciones;
+        this.unDuenio = unDuenio;
     }
 
     public Long getId() {
