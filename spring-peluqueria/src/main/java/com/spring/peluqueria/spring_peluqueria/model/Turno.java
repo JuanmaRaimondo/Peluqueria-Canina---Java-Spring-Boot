@@ -3,6 +3,8 @@ package com.spring.peluqueria.spring_peluqueria.model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,6 +22,7 @@ public class Turno {
     private String estado;
     
     @ManyToOne
+    @JsonIgnoreProperties("unDuenio")
     private Mascota mascota;
 
     public Turno() {
