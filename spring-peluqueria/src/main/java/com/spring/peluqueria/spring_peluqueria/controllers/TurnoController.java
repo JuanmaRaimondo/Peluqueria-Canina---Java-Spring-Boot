@@ -1,5 +1,6 @@
 package com.spring.peluqueria.spring_peluqueria.controllers;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.peluqueria.spring_peluqueria.dto.TurnoDTO;
 import com.spring.peluqueria.spring_peluqueria.model.Turno;
 import com.spring.peluqueria.spring_peluqueria.services.TurnoService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+
+
 
 
 
@@ -37,7 +41,7 @@ public class TurnoController {
     }
     
     @GetMapping("/traerturnos")
-    public List<Turno> traerTurnos( ) {
+    public List<TurnoDTO> traerTurnos( ) {
         return turnoservice.traerTurnos();    
     }
     
@@ -46,4 +50,10 @@ public class TurnoController {
         turnoservice.borrarTurnos(id);
         return "Borrar";
     }
+
+    @GetMapping("/fecha/{fecha}")
+    public List<TurnoDTO>  buscarPorFechas(@PathVariable LocalDate fecha) {        
+        return turnoservice.buscarPorFechas(fecha);
+    }
+    
 }
