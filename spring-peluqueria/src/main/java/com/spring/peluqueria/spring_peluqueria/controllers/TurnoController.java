@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.peluqueria.spring_peluqueria.dto.TurnoDTO;
+import com.spring.peluqueria.spring_peluqueria.dto.TurnoRequestDTO;
 import com.spring.peluqueria.spring_peluqueria.model.Turno;
 import com.spring.peluqueria.spring_peluqueria.services.TurnoService;
+
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,7 +34,7 @@ public class TurnoController {
     private TurnoService turnoservice;
    
     @PostMapping("/crear")
-    public String crearTurno(@RequestBody Turno turno) {
+    public String crearTurno(@RequestBody @Valid TurnoRequestDTO turno) {
         turnoservice.crearTurno(turno);        
             return "¡Turno creado con exito!";
     }

@@ -9,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.peluqueria.spring_peluqueria.dto.TurnoDTO;
+import com.spring.peluqueria.spring_peluqueria.dto.TurnoRequestDTO;
+import com.spring.peluqueria.spring_peluqueria.model.Mascota;
 import com.spring.peluqueria.spring_peluqueria.model.Turno;
+import com.spring.peluqueria.spring_peluqueria.repository.MascotaRepository;
 import com.spring.peluqueria.spring_peluqueria.repository.TurnoRepository;
 
 @Service
@@ -17,15 +20,24 @@ public class TurnoService{
     
     @Autowired
     private TurnoRepository turnorepo;
+    @Autowired
+    private MascotaRepository mascorepo;
+
     LocalDate hoy = LocalDate.now();
     LocalTime ahora = LocalTime.now();
-    public void crearTurno(Turno turno){
-        if (turno.getDia().isBefore(hoy) || (turno.getDia().isEqual(hoy) && turno.getHora().isBefore(ahora)) ) {
-            throw new IllegalArgumentException("No se puede crear turnos con fechas pasadas");
-        }
-            turno.setEstado("Confirmado");
-        
-        turnorepo.save(turno);
+
+    public void crearTurno(TurnoRequestDTO request){
+      Mascota mascotaEncontrada =  mascorepo.findById(request.getId_mascota()).orElse(null);
+
+      if(mascotaEncontrada == null){
+        throw new RuntimeException("No existe una mascota con ese ID");
+      }
+        Turno turnoNuevo = new Turno();
+      turnoNuevo.setDia(request.getFecha());  
+        turnoNuevo.setHora(LocalTime.parse(request.getHora()));
+        turnoNuevo.setEstado("Pendiente");
+        turnoNuevo.setMascota(mascotaEncontrada);
+        turnorepo.save(turnoNuevo);
     }
 
     public void borrarTurnos(Long id){
