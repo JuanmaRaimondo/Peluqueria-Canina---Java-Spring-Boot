@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.peluqueria.spring_peluqueria.model.Mascota;
-import com.spring.peluqueria.spring_peluqueria.repository.MascotaRepository;
+import com.spring.peluqueria.spring_peluqueria.repository.IMascotaRepository;
 
 @Service
 public class MascotaService {
 
     @Autowired
-    private MascotaRepository mascotarepo;
+    private IMascotaRepository mascotarepo;
 
     public void crearMascota(Mascota masco) {
         mascotarepo.save(masco);

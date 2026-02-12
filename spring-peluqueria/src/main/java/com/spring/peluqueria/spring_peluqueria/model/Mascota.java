@@ -1,6 +1,6 @@
 package com.spring.peluqueria.spring_peluqueria.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,7 +22,8 @@ public class Mascota {
 
     @ManyToOne
     @JoinColumn(name = "un_duenio_id")
-    @JsonBackReference
+   
+    
     private Duenio unDuenio;
 
     public Mascota() {

@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.peluqueria.spring_peluqueria.model.Duenio;
-import com.spring.peluqueria.spring_peluqueria.repository.DuenioRepository;
+import com.spring.peluqueria.spring_peluqueria.repository.IDuenioRepository;
 
 @Service
 public class DuenioService {
     
     @Autowired
-    private DuenioRepository dueniorepo;
+    private IDuenioRepository dueniorepo;
 
     public void crearDuenio(Duenio duenio){
         dueniorepo.save(duenio);

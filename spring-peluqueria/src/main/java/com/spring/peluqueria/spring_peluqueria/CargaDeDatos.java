@@ -6,17 +6,17 @@ import org.springframework.stereotype.Component;
 
 import com.spring.peluqueria.spring_peluqueria.model.Duenio;
 import com.spring.peluqueria.spring_peluqueria.model.Mascota;
-import com.spring.peluqueria.spring_peluqueria.repository.DuenioRepository;
-import com.spring.peluqueria.spring_peluqueria.repository.MascotaRepository;
+import com.spring.peluqueria.spring_peluqueria.repository.IDuenioRepository;
+import com.spring.peluqueria.spring_peluqueria.repository.IMascotaRepository;
 
 @Component
 public class CargaDeDatos implements CommandLineRunner {
 
     @Autowired
-    private DuenioRepository duenioRepo;
+    private IDuenioRepository duenioRepo;
 
     @Autowired
-    private MascotaRepository mascotaRepo;
+    private IMascotaRepository mascotaRepo;
 
     @Override
     public void run(String... args) throws Exception {

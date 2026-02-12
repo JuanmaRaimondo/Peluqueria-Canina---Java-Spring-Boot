@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 
 import com.spring.peluqueria.spring_peluqueria.model.Turno;
 
-public interface TurnoRepository extends JpaRepository<Turno, Long> {
+public interface ITurnoRepository extends JpaRepository<Turno, Long> {
     @Query("SELECT t FROM Turno t WHERE t.dia = :fecha")
     List<Turno> buscarPorFecha(@Param("fecha") LocalDate fecha);
 }

@@ -12,16 +12,16 @@ import com.spring.peluqueria.spring_peluqueria.dto.TurnoDTO;
 import com.spring.peluqueria.spring_peluqueria.dto.TurnoRequestDTO;
 import com.spring.peluqueria.spring_peluqueria.model.Mascota;
 import com.spring.peluqueria.spring_peluqueria.model.Turno;
-import com.spring.peluqueria.spring_peluqueria.repository.MascotaRepository;
-import com.spring.peluqueria.spring_peluqueria.repository.TurnoRepository;
+import com.spring.peluqueria.spring_peluqueria.repository.IMascotaRepository;
+import com.spring.peluqueria.spring_peluqueria.repository.ITurnoRepository;
 
 @Service
 public class TurnoService{
     
     @Autowired
-    private TurnoRepository turnorepo;
+    private ITurnoRepository turnorepo;
     @Autowired
-    private MascotaRepository mascorepo;
+    private IMascotaRepository mascorepo;
 
     LocalDate hoy = LocalDate.now();
     LocalTime ahora = LocalTime.now();
