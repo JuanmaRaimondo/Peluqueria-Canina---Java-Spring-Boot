@@ -10,17 +10,17 @@ public class Producto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private long id;
+    private Long id;
 
     private String nombre;
     private String marca;
     private float precioVenta;
     private float costo;
-    private int stock;
+    private Integer stock;
 
     public Producto(){}
 
-    public Producto(long id, String nombre, String marca, float precioVenta, float costo, int stock) {
+    public Producto(Long id, String nombre, String marca, float precioVenta, float costo, Integer stock) {
         this.id = id;
         this.nombre = nombre;
         this.marca = marca;
@@ -29,11 +29,11 @@ public class Producto {
         this.stock = stock;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -69,11 +69,11 @@ public class Producto {
         this.costo = costo;
     }
 
-    public int getStock() {
+    public Integer getStock() {
         return stock;
     }
 
-    public void setStock(int stock) {
+    public void setStock(Integer stock) {
         this.stock = stock;
     }
 
