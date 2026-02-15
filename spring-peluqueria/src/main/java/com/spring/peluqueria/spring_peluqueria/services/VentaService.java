@@ -6,9 +6,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.peluqueria.spring_peluqueria.model.Duenio;
 import com.spring.peluqueria.spring_peluqueria.model.Producto;
+import com.spring.peluqueria.spring_peluqueria.model.Servicio;
 import com.spring.peluqueria.spring_peluqueria.model.Venta;
+import com.spring.peluqueria.spring_peluqueria.repository.IDuenioRepository;
 import com.spring.peluqueria.spring_peluqueria.repository.IProductoRepository;
+import com.spring.peluqueria.spring_peluqueria.repository.IServiceRepository;
 import com.spring.peluqueria.spring_peluqueria.repository.IVentaRepository;
 
 @Service
@@ -20,10 +24,33 @@ public class VentaService {
     @Autowired
     private IProductoRepository productorepo;
 
+    @Autowired
+    private IDuenioRepository duenioRepo;
+
+    @Autowired
+    private IServiceRepository servicerepo;
+
     public void crearVenta(Venta venta){
+
+        if (venta.getListaProducto() == null) {
+            venta.setListaProducto(new ArrayList<>());
+        }
 
         Double total = 0.0;
         List<Producto> productosParaGuardar = new ArrayList<>();
+        List<Servicio> servicioParaGuardar = new ArrayList<>();
+
+        // 1. Obtener el dueño "vacío" que viene del JSON (solo trae ID)
+        Duenio duenioDelJson = venta.getDuenio();
+
+        // 2. Buscar el dueño real en la base de datos
+        // (Usamos el repositorio que acabamos de inyectar)
+        Duenio duenioReal = duenioRepo.findById(duenioDelJson.getId()).orElse(null);
+
+        // 3. Asignar el dueño real a la venta
+        venta.setDuenio(duenioReal);
+
+
         for (Producto p : venta.getListaProducto()) {
 
            Producto productoReal = productorepo.findById(p.getId()).orElse(null);
@@ -43,8 +70,20 @@ public class VentaService {
             }
         }
 
+        for (Servicio s : venta.getListaServicio()) {
+            Servicio servicioReal = servicerepo.findById(s.getId()).orElse(null);
+
+            if(servicioReal != null){
+                if(servicioReal.getPrecio() != null){
+                    total += servicioReal.getPrecio();
+                }
+                servicioParaGuardar.add(servicioReal);
+            }
+        }
+
         // 4. Asignamos los datos finales a la Venta
-        venta.setListaProducto(productosParaGuardar); // Relacionamos los productos reales
+        venta.setListaProducto(productosParaGuardar); 
+        venta.setListaServicio(servicioParaGuardar);// Relacionamos los productos reales
         venta.setCostoTotal(total); // Guardamos cuánto costó todo
         venta.setFechaVenta(java.time.LocalDate.now()); // Ponemos la fecha de hoy automáticamente
 
@@ -52,7 +91,7 @@ public class VentaService {
         ventarepo.save(venta);
         }
 
-        public List<Venta> traerventas(){
+        public List<Venta> traerVentas(){
             return ventarepo.findAll();
         }
     }

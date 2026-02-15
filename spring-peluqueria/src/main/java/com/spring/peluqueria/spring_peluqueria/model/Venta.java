@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Venta {
@@ -21,9 +22,13 @@ public class Venta {
 
     @ManyToMany
     private List<Producto> listaProducto;
+
+    @ManyToMany
+    private List<Servicio> listaServicio;
     public Venta(){}
 
-   
+   @ManyToOne
+    private Duenio duenio;
 
     public Venta(Long id, LocalDate fechaVenta, List<Producto> listaProducto, Double costoTotal) {
         this.id = id;
@@ -66,5 +71,25 @@ public class Venta {
         this.costoTotal = costoTotal;
     }
 
+    public Duenio getDuenio() {
+        return duenio;
+    }
+
+    public void setDuenio(Duenio duenio) {
+        this.duenio = duenio;
+    }
+
+
+    public List<Servicio> getListaServicio() {
+        return listaServicio;
+    }
+
+
+
+    public void setListaServicio(List<Servicio> listaServicio) {
+        this.listaServicio = listaServicio;
+    }
+
     
+
 }

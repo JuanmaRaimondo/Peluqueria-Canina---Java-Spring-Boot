@@ -14,13 +14,13 @@ public class Producto {
 
     private String nombre;
     private String marca;
-    private float precioVenta;
-    private float costo;
+    private Double precioVenta;
+    private Double costo;
     private Integer stock;
 
     public Producto(){}
 
-    public Producto(Long id, String nombre, String marca, float precioVenta, float costo, Integer stock) {
+    public Producto(Long id, String nombre, String marca, Double precioVenta, Double costo, Integer stock) {
         this.id = id;
         this.nombre = nombre;
         this.marca = marca;
@@ -53,19 +53,19 @@ public class Producto {
         this.marca = marca;
     }
 
-    public float getPrecioVenta() {
+    public Double getPrecioVenta() {
         return precioVenta;
     }
 
-    public void setPrecioVenta(float precioVenta) {
+    public void setPrecioVenta(Double precioVenta) {
         this.precioVenta = precioVenta;
     }
 
-    public float getCosto() {
+    public Double getCosto() {
         return costo;
     }
 
-    public void setCosto(float costo) {
+    public void setCosto(Double costo) {
         this.costo = costo;
     }
 

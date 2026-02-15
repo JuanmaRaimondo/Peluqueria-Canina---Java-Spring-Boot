@@ -20,6 +20,7 @@ public class Duenio {
     private String nombre;
     private String apellido;
     private String direccion;
+    private String celular;
 
     @OneToMany(mappedBy = "unDuenio")
     @JsonIgnore
@@ -73,6 +74,14 @@ public class Duenio {
 
     public void setMascotas(List<Mascota> mascotas) {
         this.mascotas = mascotas;
+    }
+
+    public String getCelular() {
+        return celular;
+    }
+
+    public void setCelular(String celular) {
+        this.celular = celular;
     }
     
     
