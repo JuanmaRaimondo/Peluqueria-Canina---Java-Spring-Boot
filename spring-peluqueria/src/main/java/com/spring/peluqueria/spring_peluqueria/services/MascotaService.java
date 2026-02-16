@@ -5,7 +5,10 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.peluqueria.spring_peluqueria.dto.MascotaDTO;
+import com.spring.peluqueria.spring_peluqueria.model.Duenio;
 import com.spring.peluqueria.spring_peluqueria.model.Mascota;
+import com.spring.peluqueria.spring_peluqueria.repository.IDuenioRepository;
 import com.spring.peluqueria.spring_peluqueria.repository.IMascotaRepository;
 
 @Service
@@ -14,8 +17,22 @@ public class MascotaService {
     @Autowired
     private IMascotaRepository mascotarepo;
 
-    public void crearMascota(Mascota masco) {
-        mascotarepo.save(masco);
+    @Autowired
+private IDuenioRepository duenioRepo;
+
+    public void crearMascota(MascotaDTO masco, Long id_duenio) {
+
+        Mascota mascotaNueva = new Mascota();
+        
+        mascotaNueva.setNombre(masco.getNombreMascota()); 
+        mascotaNueva.setRaza(masco.getRaza());
+
+      Duenio duenioEncontrado =  duenioRepo.findById(id_duenio).orElse(null);
+      if(duenioEncontrado != null){
+        mascotaNueva.setUnDuenio(duenioEncontrado);
+      }
+        mascotarepo.save(mascotaNueva);
+        
     }
 
     public List<Mascota> traerMascotas() {

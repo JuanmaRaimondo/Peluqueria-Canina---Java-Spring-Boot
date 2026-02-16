@@ -82,8 +82,21 @@ public class TurnoService{
             dto.setFecha(turno.getDia());
             dto.setHora(turno.getHora());
             dto.setEstado(turno.getEstado());
-            dto.setNombreDuenio(turno.getMascota().getUnDuenio().getNombre());
-            dto.setNombreMascota(turno.getMascota().getNombre());
+
+            if (turno.getMascota() != null) {
+    dto.setNombreMascota(turno.getMascota().getNombre());
+    
+    // 2. Si existe la mascota, preguntamos: ¿Tiene dueño?
+    if (turno.getMascota().getUnDuenio() != null) {
+        dto.setNombreDuenio(turno.getMascota().getUnDuenio().getNombre());
+    } else {
+        dto.setNombreDuenio("Sin Dueño"); // Manejamos el caso vacío
+    }
+} else {
+    dto.setNombreMascota("Sin Mascota");
+    dto.setNombreDuenio("Sin Dueño");
+}
+
             listaDtos.add(dto);
         }
         return listaDtos;

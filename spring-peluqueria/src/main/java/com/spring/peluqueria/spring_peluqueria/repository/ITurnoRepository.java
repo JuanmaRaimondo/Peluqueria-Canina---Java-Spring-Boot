@@ -1,6 +1,7 @@
 package com.spring.peluqueria.spring_peluqueria.repository;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,4 +13,6 @@ import com.spring.peluqueria.spring_peluqueria.model.Turno;
 public interface ITurnoRepository extends JpaRepository<Turno, Long> {
     @Query("SELECT t FROM Turno t WHERE t.dia = :fecha")
     List<Turno> buscarPorFecha(@Param("fecha") LocalDate fecha);
+
+    boolean existsByDiaAndHora(LocalDate dia, LocalTime hora);
 }

@@ -30,6 +30,9 @@ public class Venta {
    @ManyToOne
     private Duenio duenio;
 
+    @ManyToOne
+    private Mascota mascota;
+
     public Venta(Long id, LocalDate fechaVenta, List<Producto> listaProducto, Double costoTotal) {
         this.id = id;
         this.fechaVenta = fechaVenta;
@@ -88,6 +91,18 @@ public class Venta {
 
     public void setListaServicio(List<Servicio> listaServicio) {
         this.listaServicio = listaServicio;
+    }
+
+
+
+    public Mascota getMascota() {
+        return mascota;
+    }
+
+
+
+    public void setMascota(Mascota mascota) {
+        this.mascota = mascota;
     }
 
     

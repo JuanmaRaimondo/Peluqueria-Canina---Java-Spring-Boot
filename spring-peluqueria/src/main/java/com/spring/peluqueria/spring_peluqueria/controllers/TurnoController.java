@@ -39,7 +39,7 @@ public class TurnoController {
             return "¡Turno creado con exito!";
     }
     
-    @GetMapping("/traerturno")
+    @GetMapping("/traerturno/{id}")
     public Turno traerTurno(@PathVariable Long id) {
         return  turnoservice.traerTurno(id);
     }

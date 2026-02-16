@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.peluqueria.spring_peluqueria.dto.MascotaDTO;
 import com.spring.peluqueria.spring_peluqueria.model.Mascota;
 import com.spring.peluqueria.spring_peluqueria.services.MascotaService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,11 +25,11 @@ public class MascotaController {
     @Autowired
     private MascotaService mascoservice;
 
-    @PostMapping("/crear")
-    public String crear(@RequestBody Mascota masco) {
+    @PostMapping("/crear/{id}")
+    public String crear(@RequestBody MascotaDTO masco, @PathVariable Long id) {
 
-        System.out.println("El dueño que llegó es: " + masco.getUnDuenio());
-        mascoservice.crearMascota(masco);
+        
+        mascoservice.crearMascota(masco, id);
         
         return "mascota creada";
     }
